@@ -2,28 +2,13 @@
   <div class="container">
     <div>
       <logo />
-      <h1 class="title">
-        study
-      </h1>
       <h2 class="subtitle">
-        personal nuxt study
+        <nuxt-link to="/one">go 1</nuxt-link>
       </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <h2 class="subtitle">
+        <nuxt-link to="/two">go 2</nuxt-link>
+      </h2>
+
     </div>
   </div>
 </template>
