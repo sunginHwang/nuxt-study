@@ -5,7 +5,7 @@
 ## 공부 해야할 것들
 1. 라우팅 구조 파악. - clear
 2. 공통 처리 방법 (hoc 같은)
-3. ssr, clr 각각의 생명주기
+3. ssr, clr 각각의 생명주기 ssr rendering life cycle
 4. 배포전략
 5. 자동화
 6. 마지막은 ts도.,.?
