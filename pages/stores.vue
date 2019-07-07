@@ -15,7 +15,11 @@
       ...mapState('test',
         ['text']
       ),
+      ...mapState('dir/depthStore',
+        ['depth']
+      ),
       storeValue(){
+        console.log(this.depth);
         return this.text === '' ?'empty' : this.text;
       }
     },
