@@ -3,6 +3,8 @@
    <h1>storeTest</h1>
    <p>{{storeValue}}</p>
    <button @click="initTest('sungin')">initTest</button>
+   <button @click="getJsonPlaceHolder">getJsonPlaceHolder</button>
+
  </div>
 </template>
 
@@ -25,7 +27,8 @@
     },
     methods: {
       ...mapActions('test', [
-        'initTest'
+        'initTest',
+        'getJsonPlaceHolder'
       ])
     },
     data() {
