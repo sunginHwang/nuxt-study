@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import {AsyncMutationCreator} from '../core/util/mutstion-types';
 import asyncCall from '../core/util/asyncUtil';
+import {getSampleJson} from '../core/api/sampleApi';
 
 const TEST = {
   INIT_TEST: 'INIT_TEST',
@@ -23,8 +24,8 @@ export const actions = {
   },
 
   async getJsonPlaceHolder(store) {
-    const apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
-    asyncCall(store, apiUrl,TEST.GET_JSON_PLACE_HOLDER);
+    await asyncCall(store, getSampleJson,{id:1}, TEST.GET_JSON_PLACE_HOLDER);
+    console.log(store.state.jsonPlaceHolder);
   },
 };
 

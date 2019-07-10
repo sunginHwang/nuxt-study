@@ -1,13 +1,12 @@
-import axios from 'axios'
 
-const asyncCall = (store, url, mutationTypes) => {
+const asyncCall = async (store, asyncFunc, asyncParam, mutationTypes) => {
   store.commit(mutationTypes.PENDING)
-  axios(url)
-    .then(response => {
-      store.commit(mutationTypes.SUCCESS, response.data)
-    })
-    .catch(error => {
-      store.commit(mutationTypes.FAILURE, error)
-    })
+  try {
+    const res = await asyncFunc(asyncParam);
+    store.commit(mutationTypes.SUCCESS, res.data);
+  } catch (e) {
+    store.commit(mutationTypes.FAILURE, e)
+  }
+
 }
 export default asyncCall;
