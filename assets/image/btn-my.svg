@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="76" height="30" viewBox="0 0 76 30">
+    <g fill="none" fill-rule="evenodd">
+        <rect width="75" height="29" x=".5" y=".5" stroke="#AAAAAF" rx="14.5"/>
+        <text fill="#6E6E73" font-family="NotoSansCJKkr-Bold, Noto Sans CJK KR" font-size="14" font-weight="bold">
+            <tspan x="39" y="20">MY</tspan>
+        </text>
+        <g fill="#6E6E73" transform="translate(18 8)">
+            <circle cx="7" cy="4" r="4"/>
+            <path d="M0 16a7 7 0 0 1 14 0H0z"/>
+        </g>
+    </g>
+</svg>
