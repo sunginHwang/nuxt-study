@@ -1,6 +1,6 @@
 <template>
     <div class="io-wrapper">
-        <img class="io-img" v-for="image in images" :src="image"/>
+        <img class="io-img" v-for="image in images" :data-src="image"/>
     </div>
 </template>
 
@@ -25,18 +25,20 @@
             }
         },
         mounted() {
-            const io = new IntersectionObserver(entries => {
+            const io = new IntersectionObserver((entries, observer) => {
+
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         console.log('====viewport-in=====');
+                        entry.target.src = entry.target.dataset.src;
+                        observer.unobserve(entry.target);
+
                     }
                 })
             })
 
-            const boxElList = document.querySelectorAll('.io-img');
-            boxElList.forEach((el) => {
-                io.observe(el);
-            })
+            const images = document.querySelectorAll('.io-img');
+            images.forEach((el) => io.observe(el));
         }
     }
 </script>
@@ -48,7 +50,7 @@
     }
 
     .io-img {
-        width: 80%;
-        height: 80%;
+        width: 300px;
+        height: 200px;
     }
 </style>
