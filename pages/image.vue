@@ -1,24 +1,16 @@
 <template>
   <div>
     <h3>이미지 지연 로딩</h3>
-    <!--<div class="image-container" v-for="image in images">
-      <lazy-image :image-url="image"/>
-    </div>-->
-    <io-load/>
+    <div class="image-container" v-for="image in images">
+      <img v-lazyload :data-url="image"/>
+    </div>
   </div>
 </template>
 
 <script>
-/*
-  import LazyImage from '../components/lazy-image';
-*/
-  import IoLoad from '../components/io-load';
 
   export default {
     name: "image",
-    components: {
-      IoLoad
-    },
     data() {
       return {
         images: [

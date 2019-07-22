@@ -25,11 +25,9 @@
     const io = new IntersectionObserver((entries, observer) => {
 
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                console.log('====viewport-in=====');
+            if (entry.isIntersecting) { // 감지대상이 교차영역에 진입 할 경우
                 entry.target.src = entry.target.dataset.src;
-                observer.unobserve(entry.target);
-
+                observer.unobserve(entry.target); // 이미지 로딩 이후론 관찰할 필요 x
             }
         })
     })
