@@ -5,6 +5,9 @@ module.exports = {
   ** Headers of the page
   */
   head: {
+    script:[{
+      src: 'https://file.kollus.com/vgcontroller/vg-controller-client.latest.min.js'
+    }],
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
