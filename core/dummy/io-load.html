@@ -1,0 +1,38 @@
+<html>
+
+<style>
+    .io-img {
+        width: 80%;
+        height: 80%;
+        margin-bottom: 2rem;
+    }
+</style>
+
+<body>
+<div>
+    <img class="io-img" data-src="https://picsum.photos/420/320?image=0"/>
+    <img class="io-img" data-src="https://lorempixel.com/420/320/abstract/1/Sample"/>
+    <img class="io-img" data-src="https://imgplaceholder.com/420x320/ff7f7f/333333/fa-image"/>
+    <img class="io-img" data-src="https://via.placeholder.com/420x320/ff7f7f/333333?text=Sample"/>
+    <img class="io-img" data-src="https://placeimg.com/420/320/tech/grayscale"/>
+    <img class="io-img" data-src="https://loremflickr.com/420/320?lock=1"/>
+    <img class="io-img" data-src="https://placekitten.com/420/320?image=2"/>
+    <img class="io-img" data-src="https://placebear.com/420/320?image=2"/>
+</div>
+</body>
+
+<script>
+    const io = new IntersectionObserver((entries, observer) => {
+
+        entries.forEach(entry => {
+            if (entry.isIntersecting) { // 감지대상이 교차영역에 진입 할 경우
+                entry.target.src = entry.target.dataset.src;
+                observer.unobserve(entry.target); // 이미지 로딩 이후론 관찰할 필요 x
+            }
+        })
+    })
+
+    const images = document.querySelectorAll('.io-img');
+    images.forEach((el) => io.observe(el));
+</script>
+</html>

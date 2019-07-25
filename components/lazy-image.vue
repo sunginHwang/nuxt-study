@@ -3,7 +3,7 @@
     <div class="loading">
       <fade-loader/>
     </div>
-    <img class="image"
+    <img v-lazyload
          :data-url="imageUrl"/>
   </figure>
 </template>
