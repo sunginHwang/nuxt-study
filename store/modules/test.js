@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
-import {AsyncMutationCreator} from '../core/util/mutstion-types';
-import asyncCall from '../core/util/asyncUtil';
-import {getSampleJson} from '../core/api/sampleApi';
+import {AsyncMutationCreator} from '../../core/util/mutstion-types';
+import asyncCall from '../../core/util/asyncUtil';
+import {getSampleJson} from '../../core/api/sampleApi';
 
 const TEST = {
   INIT_TEST: 'INIT_TEST',
@@ -24,8 +24,10 @@ export const actions = {
   },
 
   async getJsonPlaceHolder(store) {
+/*
     await asyncCall(store, getSampleJson,{id:1}, TEST.GET_JSON_PLACE_HOLDER);
-    console.log(store.state.jsonPlaceHolder);
+*/
+    store.commit(TEST.GET_JSON_PLACE_HOLDER.INDEX, getSampleJson({id:1}))
   },
 };
 
@@ -34,8 +36,7 @@ export const mutations = {
   [TEST.INIT_TEST](state, value) {
     state.text = value;
   },
-
-  [TEST.GET_JSON_PLACE_HOLDER.PENDING](state, value) {
+  [TEST.GET_JSON_PLACE_HOLDER.INDEX](state, value) {
     console.log('PENDING');
   },
   [TEST.GET_JSON_PLACE_HOLDER.SUCCESS](state, value) {

@@ -21,7 +21,6 @@
         ['depth']
       ),
       storeValue(){
-        console.log(this.depth);
         return this.text === '' ?'empty' : this.text;
       }
     },
@@ -37,6 +36,7 @@
       }
     },
     created() {
+      console.log(this.$store);
     }
   }
 </script>
