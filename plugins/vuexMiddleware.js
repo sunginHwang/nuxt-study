@@ -7,21 +7,21 @@ export default store => {
       return
     }
 
-    const success = `${mutation.type}_SUCCESS`;
-    const failure = `${mutation.type}_FAILURE`;
+    const successMutation = `${mutation.type}_SUCCESS`;
+    const failureMutation = `${mutation.type}_FAILURE`;
 
     mutation.payload.then((res) => {
-      const existSuccessMutation = store._mutations[success] !== undefined;
+      const existSuccessMutation = store._mutations[successMutation] !== undefined;
 
       if(existSuccessMutation){
-        store.commit(success, res)
+        store.commit(successMutation, res)
       }
 
     }).catch((e) => {
-      const existFailureMutation = store._mutations[failure] !== undefined;
+      const existFailureMutation = store._mutations[failureMutation] !== undefined;
 
       //something auth check && show error modal
-      existFailureMutation ? store.commit(failure, e) : console.log(e);
+      existFailureMutation ? store.commit(failureMutation, e) : console.log(e);
 
     })
   })
