@@ -5,6 +5,8 @@ import vuexMiddleware from '../plugins/vuexMiddleware';
 
 Vue.use(Vuex);
 
-const store = () => new Vuex.Store({ modules});
+const plugins = [vuexMiddleware];
+
+const store = () => new Vuex.Store({plugins, modules});
 
 export default store;

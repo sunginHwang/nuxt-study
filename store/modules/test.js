@@ -1,21 +1,16 @@
 import * as _ from 'lodash';
-import {AsyncMutationCreator} from '../../core/util/mutstion-types';
+import {AsyncMutationCreator, AsyncMutationCreatorP} from '../../core/util/mutstion-types';
 import {getSampleJson} from '../../core/api/sampleApi';
 import asyncCommit from '../../core/util/asyncCommit';
+import asyncCall from '../../core/util/asyncCall';
 
 const TEST = {
   INIT_TEST: 'INIT_TEST',
-  GET_JSON_PLACE_HOLDER: AsyncMutationCreator('GET_JSON_PLACE_HOLDER')
+  GET_JSON_PLACE_HOLDER: AsyncMutationCreator('GET_JSON_PLACE_HOLDER'),
+  GET_JSON_PLACE_HOLDER_P: AsyncMutationCreatorP('GET_JSON_PLACE_HOLDER')
 }
 
 const moduleName = 'test';
-const a = () => {
-  let b = () => 'GET_JSON_PLACE_HOLDER';
-  b.success = () => 'GET_JSON_PLACE_HOLDER_SUCCESS';
-  return b;
-};
-
-console.log(a()());
 
 // initialState
 const initState = {
@@ -32,11 +27,16 @@ export const actions = {
     commit(TEST.INIT_TEST, value);
   },
 
-  async getJsonPlaceHolder(store) {
-    console.log(store);
-    await asyncCommit(moduleName, TEST.GET_JSON_PLACE_HOLDER, getSampleJson({id: 1}));
-    console.log(a);
-    /*   store.commit(TEST.GET_JSON_PLACE_HOLDER.REQUEST, getSampleJson({id:1}))*/
+  async getJsonPlaceHolderByPlugin({commit}) {
+    commit(TEST.GET_JSON_PLACE_HOLDER_P.REQUEST, getSampleJson(1));
+    commit(TEST.GET_JSON_PLACE_HOLDER_P.REQUEST, getSampleJson(2));
+  },
+  async getJsonPlaceHolderByUtil({commit}) {
+    await asyncCall(commit,TEST.GET_JSON_PLACE_HOLDER, getSampleJson(1));
+  },
+  async getJsonPlaceHolder() {
+    await asyncCommit(moduleName, TEST.GET_JSON_PLACE_HOLDER, getSampleJson(1));
+    await asyncCommit(moduleName, TEST.GET_JSON_PLACE_HOLDER, getSampleJson(1));
   },
 };
 
@@ -53,6 +53,16 @@ export const mutations = {
     state.jsonPlaceHolder = value;
   },
   [TEST.GET_JSON_PLACE_HOLDER.FAILURE](state, value) {
+    console.log('FAILURE');
+  },
+  [TEST.GET_JSON_PLACE_HOLDER_P.REQUEST](state, value) {
+    console.log('REQUEST');
+  },
+  [TEST.GET_JSON_PLACE_HOLDER_P.SUCCESS](state, value) {
+    console.log('SUCCESS');
+    state.jsonPlaceHolder = value;
+  },
+  [TEST.GET_JSON_PLACE_HOLDER_P.FAILURE](state, value) {
     console.log('FAILURE');
   },
 

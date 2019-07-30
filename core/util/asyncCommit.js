@@ -6,7 +6,6 @@ const asyncCommit = async (moduleName, asyncMutationType, asyncFunc) => {
   const existPendingMutation = s._mutations[`${moduleName}/${asyncMutationType.PENDING}`] !== undefined;
 
   if (existPendingMutation) {
-    console.log('why');
     s.commit(`${moduleName}/${asyncMutationType.PENDING}`, 't')
   }
 

@@ -4,6 +4,8 @@
    <p>{{storeValue}}</p>
    <button @click="initTest('sungin')">initTest</button>
    <button @click="getJsonPlaceHolder">getJsonPlaceHolder</button>
+   <button @click="getJsonPlaceHolderByPlugin">getJsonPlaceHolderByPlugin</button>
+
 
  </div>
 </template>
@@ -27,7 +29,8 @@
     methods: {
       ...mapActions('test', [
         'initTest',
-        'getJsonPlaceHolder'
+        'getJsonPlaceHolder',
+        'getJsonPlaceHolderByPlugin'
       ])
     },
     data() {

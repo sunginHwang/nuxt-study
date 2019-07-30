@@ -1,6 +1,6 @@
 export default store => {
 
-  store.subscribe((mutation, state) => {
+  store.subscribe((mutation) => {
     const isPromise = mutation.payload && mutation.payload instanceof Promise;
 
     if (!isPromise) {
@@ -13,7 +13,7 @@ export default store => {
     mutation.payload.then((res) => {
       const existSuccessMutation = store._mutations[successMutation] !== undefined;
 
-      if(existSuccessMutation){
+      if (existSuccessMutation) {
         store.commit(successMutation, res)
       }
 
