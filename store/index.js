@@ -7,6 +7,6 @@ Vue.use(Vuex);
 
 const plugins = [vuexMiddleware];
 
-const store = () => new Vuex.Store({plugins, modules});
+const store = () => new Vuex.Store({ modules});
 
 export default store;
