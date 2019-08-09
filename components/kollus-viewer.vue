@@ -6,16 +6,14 @@
             allow="autoplay"
             allowfullscreen
     ></iframe>
+    <p>{{status}}</p>
     <button ref="btn" @click="playNote">노트기능 동작</button>
-    <button @click="videoChange">동영상 변경</button>
+    <button @click="videoChange('test')">동영상 변경</button>
+    <button @click="videoChange('next')">원본동영상 보기</button>
   </div>
 </template>
 
 <script>
-
-  const video1 = 'https://v.kr.kollus.com/s?jwt=eyJhbGciOiJIUzI1NiJ9.eyJjdWlkIjoiZmFzdGNhbXB1cy10ZXN0IiwiZXhwdCI6IjE1NjUyOTYxNzEyMTEiLCJtYyI6W3sibWNrZXkiOiIzcEFUQ0tBdCJ9XX0.2RO6SqbkgwEjGADgJLkBEBLa4W8kNWUnDGwf2kiDLYA&custom_key=fa0cefd06c15389ef3251ba885c3722d83144d786ca177d5bf7bd8b1e35bee96&s=0';
-  const video2 = 'https://v.kr.kollus.com/s?jwt=eyJhbGciOiJIUzI1NiJ9.eyJjdWlkIjoiZmFzdGNhbXAiLCJleHB0IjoiMTU2NTI5NjMyMDk1MyIsIm1jIjpbeyJtY2tleSI6Ik5XNzRSWWp5In1dfQ.HjcqvMnN9YTYhh7yZRTfQu7JAjMj2IrRDjGqu2hz_cw&custom_key=0b50155632326ca34e42550f10d6fca2c42c7b62a47eee4841aabd0cd1a913ea&s=0';
-
   export default {
     name: 'kollus-viewer',
     props: {
@@ -33,6 +31,7 @@
         vgController: null,
         polling: null,
         isCall: '자동 호출 전',
+        status:  '로드안됨.'
       };
     },
     watch: {
@@ -50,10 +49,10 @@
       playNote() {
         this.play(this.activePosition);
       },
-      videoChange(){
+      videoChange(position) {
         this.$router.push({
           name: 'viewer-position',
-          params: { position: 'next' },
+          params: {position},
         });
       },
       loadVgController() {
@@ -68,7 +67,12 @@
           this.vgController = new window.VgControllerClient({target_window: this.$refs.kollusViewer.contentWindow});
 
 
+          this.vgController.on('loaded', () => {
+            this.status = '로딩준비완료';
+          });
+
           this.vgController.on('ready', () => {
+            this.status = '로딩래디완료';
           });
 
           this.vgController.on('play', () => {
